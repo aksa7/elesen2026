@@ -13,26 +13,21 @@
 <body>
 
   <div class="canvas form-page form-page--reg">
+    <div class="visually-hidden">
+      <h1>The Greatest ELESEN show</h1>
+      <p>2026.09.24. Kino teatras „Daina“, Kaunas</p>
+    </div>
+
+    <div class="form-page__decor" aria-hidden="true">
+      <img class="form-page__decor-item form-page__decor-item--bowtie"
+           src="../assets/cutouts/bowtie.webp" alt="" width="356" height="306">
+      <img class="form-page__decor-item form-page__decor-item--reel"
+           src="../assets/cutouts/film_reel_1.webp" alt="" width="747" height="626">
+      <img class="form-page__decor-item form-page__decor-item--ring"
+           src="../assets/cutouts/ring_1.webp" alt="" width="322" height="322">
+    </div>
+
     <div class="form-page__inner">
-      <header class="form-page__header">
-        <a class="form-page__brand headline-lockup" href="../">
-          <img class="headline-lockup__glow" src="../assets/cutouts/spotlight_glow.webp"
-               alt="" width="1200" height="1160" aria-hidden="true" decoding="async">
-          <h1 class="hero-title form-page__logo">
-            <span class="hero-title__the">The</span>
-            <span class="hero-title__greatest">Greatest</span>
-            <img class="hero-title__logo" src="../assets/cutouts/elesen_logo.webp"
-                 alt="ELESEN" width="502" height="117">
-            <span class="hero-title__show">show</span>
-          </h1>
-        </a>
-
-        <p class="form-page__meta hero__date">
-          2026.09.24<br>
-          Kino teatras „Daina“, Kaunas
-        </p>
-      </header>
-
       <h2 class="form-page__title">Registracija į renginį</h2>
 
       <div class="form-alert" id="form-alert" hidden role="alert"></div>
@@ -67,15 +62,15 @@
         </div>
 
         <fieldset class="reg-form__field reg-form__field--radio">
-          <legend>Ar vyksite autobusu?</legend>
+          <legend>Vyksiu:</legend>
           <div class="reg-form__radios" role="group" aria-describedby="autobusas-error">
             <label class="reg-form__radio">
-              <input type="radio" name="autobusas" value="Taip" required>
-              <span>Taip</span>
+              <input type="radio" name="autobusas" value="užsakytu autobusu" required>
+              <span>Užsakytu autobusu</span>
             </label>
             <label class="reg-form__radio">
-              <input type="radio" name="autobusas" value="Ne" required>
-              <span>Ne</span>
+              <input type="radio" name="autobusas" value="savo automobiliu" required>
+              <span>Savo automobiliu</span>
             </label>
           </div>
           <p class="reg-form__error" id="autobusas-error" hidden></p>

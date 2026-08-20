@@ -20,7 +20,7 @@ var HEADERS = [
 ];
 
 // Stulpelio pločiai (px) — vienodas, tvarkingas vaizdas
-var COL_WIDTHS = [160, 220, 140, 240, 120, 100];
+var COL_WIDTHS = [160, 220, 140, 240, 120, 180];
 
 function doGet() {
   return ContentService

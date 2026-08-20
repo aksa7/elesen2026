@@ -12,47 +12,81 @@
   margin: 0 auto;
   overflow: hidden;
   background-color: var(--color-bg-deep);
-  background-image: url('../assets/bg_slices/curtain_tile.webp');
+}
+
+/*
+  Curtain tile on .stage (below hero on index) so tile y=0 meets the hero
+  cross-fade. Same pixel-width family as the hero — both scale at 100% width.
+*/
+.stage {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  /* flow-root: keep child margins inside so curtain paints flush under hero */
+  display: flow-root;
+  min-height: 100%;
+  background-color: var(--color-bg-deep);
+  background-image: url('../assets/bg_slices/curtain_tile_mobile.webp');
   background-repeat: repeat-y;
   background-size: 100% auto;
+  background-position: top center;
 }
+
+@media (min-width: 1025px) {
+  .stage {
+    background-image: url('../assets/bg_slices/curtain_tile_desktop.webp');
+  }
+}
+
+/*
+  Form pages have no hero — curtain covers the full .canvas height
+  (min 100svh, grows with content) so there is no dark band at the bottom.
+*/
+.canvas.form-page {
+  min-height: 100svh;
+  background-image: url('../assets/bg_slices/curtain_tile_mobile.webp');
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  background-position: top center;
+}
+
+@media (min-width: 1025px) {
+  .canvas.form-page {
+    background-image: url('../assets/bg_slices/curtain_tile_desktop.webp');
+  }
+}
+
 .content { position: relative; z-index: 2; }
 .decor-layer { display: none; pointer-events: none; }
 
 /* --------------------------------------------------------------------------
-   Shared headline lockup + spotlight_glow.webp
-   Same markup/CSS on index, registracija, aciu — centred via translate(-50%,-50%)
+   Hero — natural aspect (1860×953 / 1130×953). No crop, no vh cap.
    -------------------------------------------------------------------------- */
-.headline-lockup {
+.hero {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: max-content;
-  max-width: 100%;
-  margin-inline: auto;
+  z-index: 2;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
-.headline-lockup__glow {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  /* Design: ~820×784 over lockup ~723 wide → ~113% of lockup */
-  width: 113%;
+.hero__picture {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+.hero__image {
+  display: block;
+  width: 100%;
   height: auto;
-  min-width: min(92vw, 42rem);
-  aspect-ratio: 1200 / 1160;
-  object-fit: contain;
-  pointer-events: none;
-  z-index: 0;
-  mix-blend-mode: screen;
-}
-.headline-lockup .hero-title {
-  position: relative;
-  z-index: 1;
+  margin: 0;
+  padding: 0;
 }
 
-/* Hero section — plain curtain only (no bg_1_hero) */
+/* Intro + CTA sit on the curtain stage immediately under the hero */
 .hero-section {
   position: relative;
 }
@@ -95,35 +129,11 @@
 }
 section, .hero { padding-block: var(--space-lg); }
 
-.hero-section .hero { padding-top: 8vw; }
+.hero { padding-block: 0; }
+/* No gap between hero image and curtain stage — intro padding is content only */
+.hero-section > .intro { padding-top: 0; }
 .hero-section .cta { padding-bottom: 8vw; }
 
-.hero__inner { text-align: center; }
-.hero-title {
-  display: flex; flex-direction: column; align-items: center; gap: 0.1em;
-  font-family: var(--font-display);
-  font-size: var(--fs-hero);
-  color: #ffffff;
-}
-.hero-title__greatest { margin-top: -0.15em; }
-/* Design: Greatest block ~452px, logo 117px → ~3.9:1. Logo width 502/242 ≈ 2.07em */
-.hero-title__logo {
-  width: 2.07em;
-  height: auto;
-  margin-block: 0.15em;
-}
-.hero-title__show {
-  display: block;
-  font-size: 0.545em;
-  margin-top: 0.12em;
-}
-.hero__date {
-  margin-top: var(--space-md);
-  font-size: var(--fs-small);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
 .intro { text-align: center; }
 .intro__lead {
   max-width: none; margin-inline: auto;
@@ -148,9 +158,28 @@ section, .hero { padding-block: var(--space-lg); }
 .dresscode__title { font-size: var(--fs-h2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-md); color: var(--color-gold); }
 .dresscode__body, .dresscode__lead { max-width: none; margin-inline: auto; margin-bottom: var(--space-sm); }
 .dresscode__lead { font-weight: 600; margin-top: var(--space-md); color: var(--color-gold); }
-.dresscode__list { display: inline-block; text-align: left; margin-block: var(--space-sm); }
-.dresscode__list li { position: relative; padding-left: 1.4em; margin-bottom: 0.5em; }
-.dresscode__list li::before { content: "•"; position: absolute; left: 0; color: var(--color-gold); }
+.dresscode__list {
+  display: block;
+  width: 100%;
+  max-width: 36em;
+  margin-block: var(--space-sm);
+  margin-inline: auto;
+  list-style: none;
+  padding-left: 0;
+  text-align: center;
+}
+.dresscode__list li {
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 0.5em;
+  text-align: center;
+  list-style: none;
+}
+.dresscode__list li::before,
+.dresscode__list li::marker {
+  content: none;
+  display: none;
+}
 .dresscode__accent { max-width: none; margin: var(--space-md) auto 0; font-weight: 600; color: var(--color-gold); }
 
 /* Mobile gallery — desktop eilučių ritmas: 1, 2, 2, 3, 2, 1, 3 */
@@ -214,12 +243,7 @@ section, .hero { padding-block: var(--space-lg); }
     inset: 0;
     z-index: 1;
   }
-  .decor-layer--front {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-  }
+  .decor-layer--front { display: none; }
   .decor { position: absolute; display: block; }
 
   /* Foniniame sluoksnyje mobile: film reel + bowtie */
@@ -241,15 +265,6 @@ section, .hero { padding-block: var(--space-lg); }
     right: -0.5rem;
     top: 115rem;
     width: 9rem;
-    height: auto;
-  }
-
-  /* Priekiniame sluoksnyje mobile: tik mic */
-  .decor-layer--front .decor--mic {
-    left: auto;
-    right: 1rem;
-    top: 0;
-    width: 7.5rem;
     height: auto;
   }
 
@@ -293,17 +308,11 @@ section, .hero { padding-block: var(--space-lg); }
     inset: 0;
     z-index: 1;
   }
-  .decor-layer--front {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-  }
+  .decor-layer--front { display: none; }
   .decor { position: absolute; display: block; }
   .decor img { width: 100%; height: auto; }
 
   /* manifest.json coordinates / 10 = rem, koreguota pagal reference */
-  .decor--mic             { left: 135.7rem; top: -3.4rem;  width: 13.3rem; }
   .decor--film-reel-1     { left: -25rem;  top: 190rem;   width:   80rem; }
   .decor--bowtie          { left: 133.4rem; top: 274.9rem; width: 35.6rem; }
   .decor--ring-1          { left: 12.3rem;  top: 355.7rem; width: 32.2rem; height: 32.2rem; object-fit: contain; }
@@ -341,41 +350,8 @@ section, .hero { padding-block: var(--space-lg); }
   .hero-section .intro,
   .hero-section .cta { padding-block: 0; }
 
-  /* ---------- HERO ---------- */
-  .content .hero { padding: 15.1rem 0 0; text-align: center; }
-  /* The+Greatest ≈ 45.2rem tall at 24.2rem font (design 452px) */
-  .hero-title {
-    display: flex; flex-direction: column; align-items: center; gap: 0;
-    font-family: var(--font-display);
-    color: #ffffff;
-    line-height: 1.02;
-    font-size: 24.2rem;
-  }
-  .hero-title__the,
-  .hero-title__greatest { display: block; }
-  .hero-title__logo {
-    width: 2.07em; /* 50.2rem @ 24.2rem → 502×117 design */
-    height: auto;
-    margin: 3.6rem 0 0;
-  }
-  .hero-title__show {
-    display: block;
-    font-size: 0.545em; /* 13.2rem @ 24.2rem */
-    margin-top: 2.4rem;
-  }
-  .headline-lockup__glow {
-    width: 113%;
-    min-width: 82rem; /* ~2×rx=820 */
-  }
-
-  .hero__date {
-    margin-top: 9.6rem;
-    font-size: 2.2rem;
-    line-height: 1.55;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-  }
+  /* ---------- HERO (baked image) ---------- */
+  .content .hero { padding: 0; }
 
   /* ---------- INTRO ---------- */
   .intro { text-align: center; }
@@ -434,14 +410,22 @@ section, .hero { padding-block: var(--space-lg); }
   .dresscode__list {
     width: 87.7rem; max-width: 87.7rem;
     margin: 9.5rem auto 0;
-    display: block; text-align: center;
+    display: block;
+    text-align: center;
     font-size: 3rem; line-height: 1.35;
+    list-style: none;
+    padding-left: 0;
   }
-  .dresscode__list li { padding-left: 0; margin-bottom: 1.8rem; }
-  .dresscode__list li::before {
-    position: static;
-    content: "•\00a0\00a0";
-    color: var(--color-gold);
+  .dresscode__list li {
+    padding-left: 0;
+    margin-bottom: 1.8rem;
+    text-align: center;
+    list-style: none;
+  }
+  .dresscode__list li::before,
+  .dresscode__list li::marker {
+    content: none;
+    display: none;
   }
   .dresscode__accent {
     width: 85.9rem; max-width: 85.9rem;

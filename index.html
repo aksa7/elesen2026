@@ -13,7 +13,26 @@
 
  <div class="canvas">
 
-  <!-- Dekoras — foninis sluoksnis (už teksto) -->
+  <header class="hero" id="hero"
+          aria-label="The Greatest ELESEN Show — 2026.09.24, Kino teatras „Daina“, Kaunas">
+    <picture class="hero__picture">
+      <source media="(max-width: 1024px)"
+              srcset="assets/bg_slices/hero_mobile.webp"
+              width="1130" height="953">
+      <img class="hero__image"
+           src="assets/bg_slices/hero_full.webp"
+           alt=""
+           width="1860" height="953"
+           fetchpriority="high"
+           decoding="async">
+    </picture>
+    <div class="visually-hidden">
+      <h1>The Greatest ELESEN show</h1>
+      <p>2026.09.24. Kino teatras „Daina", Kaunas</p>
+    </div>
+  </header>
+
+  <!-- Dekoras — absolute to .canvas (coords include hero height) -->
   <div class="decor-layer decor-layer--back" aria-hidden="true">
     <img class="decor decor--film-reel-1" src="assets/cutouts/film_reel_1.webp" alt="" width="747" height="626">
     <img class="decor decor--bowtie" src="assets/cutouts/bowtie.webp" alt="" width="356" height="306">
@@ -29,31 +48,12 @@
     </div>
   </div>
 
+  <!-- Curtain tile starts here — same width family as the hero above -->
+  <div class="stage">
+
   <div class="content">
 
-  <!-- Hero diapazonas: antraštė → CTA (y 0–1900) -->
   <div class="hero-section">
-
-  <header class="hero" id="hero">
-    <div class="section-inner hero__inner">
-      <div class="headline-lockup">
-        <img class="headline-lockup__glow" src="assets/cutouts/spotlight_glow.webp"
-             alt="" width="1200" height="1160" aria-hidden="true" decoding="async">
-        <h1 class="hero-title">
-          <span class="hero-title__the">The</span>
-          <span class="hero-title__greatest">Greatest</span>
-          <img class="hero-title__logo" src="assets/cutouts/elesen_logo.webp"
-               alt="ELESEN" width="502" height="117" fetchpriority="high">
-          <span class="hero-title__show">show</span>
-        </h1>
-      </div>
-
-      <p class="hero__date">
-        2026.09.24<br>
-        Kino teatras „Daina", Kaunas
-      </p>
-    </div>
-  </header>
 
   <section class="intro" id="intro" aria-label="Įvadas">
     <div class="section-inner">
@@ -82,7 +82,7 @@
       <dl class="program__list">
         <div class="program__row">
           <dt class="program__time">19:00</dt>
-          <dd class="program__desc">Renginio pradžiai, susitikimas Dainos kino teatre</dd>
+          <dd class="program__desc">Renginio pradžia, susitikimas Dainos kino teatre</dd>
         </div>
         <div class="program__row">
           <dt class="program__time">19:00 - 22:00</dt>
@@ -174,10 +174,7 @@
 
   </div><!-- /.content -->
 
-  <!-- Dekoras — priekinis sluoksnis (hero mic) -->
-  <div class="decor-layer decor-layer--front" aria-hidden="true">
-    <img class="decor decor--mic" src="assets/cutouts/mic.webp" alt="" width="133" height="587">
-  </div>
+  </div><!-- /.stage -->
 
  </div><!-- /.canvas -->
 

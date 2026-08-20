@@ -3,38 +3,15 @@
    ========================================================================== */
 
 .form-page {
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   overflow: hidden;
   font-family: var(--font-body);
-}
-
-/*
-  Headline on form pages uses shared .headline-lockup (layout.css).
-  Brand is a link; title scales slightly smaller than home hero.
-*/
-.form-page__brand.headline-lockup {
-  display: flex;
-  text-decoration: none;
-  color: inherit;
-  margin-inline: auto;
-  margin-bottom: 0;
-}
-.form-page__logo {
-  margin: 0 auto;
-  font-size: clamp(4.2rem, 11vw, 7.2rem);
-}
-.form-page__logo .hero-title__logo {
-  width: 2.07em;
-  height: auto;
-  margin: 0.2em 0 0;
-}
-.form-page__logo .hero-title__show {
-  display: block;
-  font-size: 0.545em;
-  margin-top: 0.12em;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .form-page__inner {
@@ -42,33 +19,41 @@
   z-index: 1;
   width: 100%;
   max-width: 52rem;
-  margin: 0 auto;
+  margin-inline: auto;
   text-align: center;
+  box-sizing: border-box;
+}
+
+/* Desktop-only edge decor behind the registration form */
+.form-page__decor {
+  display: none;
+  pointer-events: none;
 }
 
 /* ---- Registracija ---- */
 .form-page--reg {
-  align-items: flex-start;
-  padding: 3.2rem 2rem 6rem;
+  justify-content: flex-start;
+  padding: 4.8rem 0 6rem;
 }
-.form-page--reg .form-page__header {
-  position: relative;
-  margin-bottom: 2.4rem;
+.form-page--reg .form-page__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-inline: 2rem;
 }
-.form-page--reg .headline-lockup {
-  padding: 1.2rem 0 0.8rem;
+.form-page--reg .form-page__title,
+.form-page--reg .form-alert,
+.form-page--reg .reg-form,
+.form-page--reg .form-page__back {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ---- Ačiū ---- */
 .form-page--thanks {
-  align-items: center;
   justify-content: center;
-  min-height: 100svh;
-  padding: 4rem 2rem;
+  padding: 3.2rem 0;
   box-sizing: border-box;
-}
-.form-page--thanks .headline-lockup {
-  padding: 1.2rem 0 0.8rem;
 }
 .form-page__inner--thanks {
   display: flex;
@@ -79,11 +64,10 @@
   width: 100%;
   max-width: 44rem;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 2rem;
 }
 
-.form-page__meta,
-.form-page .hero__date {
+.form-page__meta {
   display: block;
   width: 100%;
   max-width: none;
@@ -101,9 +85,6 @@
   color: var(--color-text);
   opacity: 0.92;
 }
-.form-page--reg .form-page__meta {
-  margin-bottom: 0;
-}
 
 .form-page__title {
   font-family: var(--font-body);
@@ -118,25 +99,27 @@
 }
 
 .form-page__title--thanks {
+  font-family: var(--font-body);
   text-transform: none;
   letter-spacing: 0;
-  margin: 2.4rem 0 1.6rem;
+  margin: 0 0 2rem;
   color: var(--color-gold);
 }
 .form-page__thanks-kicker {
   display: block;
   font-family: var(--font-body);
-  font-size: clamp(3.2rem, 6vw, 4.2rem);
+  font-style: normal;
+  font-size: clamp(9.6rem, 18vw, 12.6rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.05;
   color: var(--color-gold-bright);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 .form-page__thanks-sub {
   display: block;
-  margin-top: 0.45em;
+  margin-top: 0.35em;
   font-family: var(--font-body);
-  font-size: clamp(1.4rem, 2.2vw, 1.7rem);
+  font-size: clamp(4.2rem, 6.6vw, 5.1rem);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -218,6 +201,13 @@
   flex-direction: column;
   gap: 1.8rem;
   font-family: var(--font-body);
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+.reg-form__field {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .reg-form__field > label,
@@ -274,8 +264,8 @@
   justify-content: center;
   gap: 0.8rem;
   min-height: 48px;
-  height: 48px;
-  padding: 0 1.8rem;
+  height: auto;
+  padding: 1rem 1.6rem;
   background: rgba(26, 4, 10, 0.72);
   border: 1.5px solid rgba(233, 200, 119, 0.55);
   border-radius: var(--radius);
@@ -283,15 +273,16 @@
   font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.25;
   color: var(--color-text);
   margin: 0;
   box-sizing: border-box;
+  white-space: normal;
+  text-align: left;
 }
 .reg-form__radio span {
-  line-height: 1;
-  display: flex;
-  align-items: center;
+  line-height: 1.25;
+  display: block;
 }
 .reg-form__radio input[type="radio"] {
   width: 1.8rem;
@@ -337,27 +328,49 @@
 }
 
 @media (min-width: 1025px) {
-  .form-page--reg { padding: 4rem 2rem 8rem; }
-  .form-page--thanks { padding: 5rem 2rem; }
+  .form-page--reg { padding: 6rem 0 8rem; }
+  .form-page--thanks { padding: 4rem 0; justify-content: center; }
   .form-page__inner { max-width: 56rem; }
-  .form-page__inner--thanks { max-width: 46rem; }
-  .form-page__logo {
-    font-size: 12rem; /* scaled-down home 24.2rem; keeps 2.07em logo ratio */
+  .form-page__inner--thanks { max-width: 52rem; }
+  .form-page--reg .form-page__inner,
+  .form-page__inner--thanks {
+    padding-top: 0;
   }
-  .form-page__logo .hero-title__logo {
-    width: 2.07em;
-    margin: 1.2rem 0 0;
+
+  .form-page__decor {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
   }
-  .form-page__logo .hero-title__show {
-    font-size: 0.545em;
-    margin-top: 1rem;
+  .form-page__decor-item {
+    position: absolute;
+    display: block;
+    height: auto;
+    opacity: 0.42;
   }
-  .form-page .headline-lockup__glow {
-    min-width: 48rem;
+  .form-page__decor-item--bowtie {
+    right: -1rem;
+    top: 10rem;
+    width: 24rem;
   }
-  .form-page .hero__date,
+  .form-page__decor-item--reel {
+    left: -10rem;
+    bottom: 4rem;
+    width: 42rem;
+  }
+  .form-page__decor-item--ring {
+    left: 3rem;
+    top: 48%;
+    width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+  }
+
   .form-page__meta {
-    margin-top: 2.4rem !important;
+    margin-top: 2.4rem;
     font-size: 2rem;
     letter-spacing: 0.14em;
     text-align: center;
@@ -370,10 +383,10 @@
     min-height: 46px;
   }
   .form-page__thanks-kicker {
-    font-size: 4.4rem;
+    font-size: 12.6rem;
   }
   .form-page__thanks-sub {
-    font-size: 1.7rem;
+    font-size: 5.1rem;
   }
   .reg-form__field input[type="text"],
   .reg-form__field input[type="tel"],
@@ -383,7 +396,7 @@
   }
   .reg-form__radio {
     min-height: 52px;
-    height: 52px;
-    padding: 0 2.2rem;
+    height: auto;
+    padding: 1.1rem 2.2rem;
   }
 }

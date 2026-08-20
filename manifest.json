@@ -143,42 +143,29 @@
   },
   "_photos": "See photos_manifest.json - collage split into 14 individual images",
   "_background_architecture": {
-    "note": "Sectioned bg_slices approach replaced. New architecture:",
+    "note": "Live page body uses tiling curtain only. Hero is a separate baked image (see _hero_architecture).",
     "base_tile": {
       "file": "bg_slices/curtain_tile.webp",
-      "usage": "body/.canvas background-image, background-repeat: repeat-y, background-size: 100% auto. Seamless vertical loop, tested — no visible seam. Use for the ENTIRE page height at any breakpoint, mobile or desktop, regardless of actual content height."
-    },
-    "hero_only": {
-      "file": "bg_slices/bg_1_hero.webp",
-      "usage": "Hero <header>/section ONLY (title+logo+show+date+intro+CTA — everything within the original y 0-1900 range). background-repeat: no-repeat, background-size: cover, background-position: top center. Contains the baked-in red spotlight glow. Do not tile this one."
+      "usage": "body/.canvas background-image, background-repeat: repeat-y, background-size: 100% auto. Seamless vertical loop for the entire page below the hero."
     },
     "warm_glows": {
-      "note": "The two lower warm light blooms (originally near the light fixtures) could not be cleanly extracted as standalone assets — they use a Photoshop blend mode that only looks correct composited with the curtain beneath it. Approximate instead with CSS on the light_fixture cutout wrapper elements, e.g.: background: radial-gradient(circle, rgba(230,160,90,0.35), transparent 70%). This scales and repositions automatically with the light_fixture element at any breakpoint — actually more robust than a fixed image would have been."
-    },
-    "deprecated": [
-      "bg_slices/bg_2_program.webp",
-      "bg_slices/bg_3_dresscode.webp",
-      "bg_slices/bg_4_photos.webp",
-      "bg_slices/bg_full_single.webp — do NOT use for the whole page, see note in handoff doc"
-    ]
+      "note": "The two lower warm light blooms approximate with CSS on the light_fixture cutout wrapper elements, e.g.: background: radial-gradient(circle, rgba(230,160,90,0.35), transparent 70%)."
+    }
   },
   "_hero_architecture": {
-    "why": "Hero and curtain tile MUST share the same pixel width and be cut from the same x-range of the source, otherwise the curtain folds render at different scales and a hard seam appears where the hero ends. That was the mobile bug.",
     "desktop": {
-      "hero": "bg_slices/hero_full.webp (1860x953)",
-      "tile": "bg_slices/curtain_tile_desktop.webp (1860x360)"
+      "file": "bg_slices/hero_full.webp",
+      "width": 1920,
+      "height": 1150,
+      "note": "Complete hero exactly as designed: curtain + spotlight + The Greatest/elesen/show lockup + microphone + date line. Rendered straight from the PSD, so it is pixel-identical to the design. Use as the hero <img>; do NOT layer a separate glow, lockup, mic or date on top."
     },
     "mobile": {
-      "hero": "bg_slices/hero_mobile.webp (1130x953)",
-      "tile": "bg_slices/curtain_tile_mobile.webp (1130x360)"
+      "file": "bg_slices/hero_mobile.webp",
+      "width": 1130,
+      "height": 1150,
+      "note": "Tighter crop of the same hero for narrow screens so the headline stays legible. Swap via <picture> media query at max-width: 1024px."
     },
-    "rules": [
-      "Hero: background-size 100% auto, no-repeat, top center. Tile: background-size 100% auto, repeat-y.",
-      "Never pair a hero with a tile of a different width. Desktop hero goes with desktop tile only; mobile hero with mobile tile only.",
-      "Both hero images are cropped so the lockup sits at the exact horizontal centre, and raised 50px in frame. Do not add extra offsets.",
-      "The bottom 200px of each hero is cross-faded into its tile top, so the tile must begin immediately where the hero image ends - no gap, no margin, no padding between them."
-    ],
-    "seo": "Headline is inside the image, so every page keeps a visually-hidden <h1> with the real text. Never display:none.",
-    "aspect_note": "Hero is 1.95:1. At 1500px wide it renders ~769px tall, so the venue line fits within a typical laptop viewport. Render at natural aspect (width:100%; height:auto) - never object-fit:cover, never max-height, never a viewport-height cap. Cropping or rescaling breaks fold alignment with the tile."
+    "seo": "Because the headline is now part of the image, index.html/registracija/aciu MUST each keep a visually-hidden <h1> with the real text. Hide with clip-path/absolute positioning, never display:none.",
+    "removed": "spotlight_glow.webp deleted - the synthesised glow did not match the design geometry. The spotlight now comes baked into hero_full.webp / hero_mobile.webp."
   }
 }

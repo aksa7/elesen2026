@@ -81,7 +81,7 @@ function validate() {
     ok = false;
   }
   if (!autobusasEl) {
-    setError('autobusas', 'Pasirinkite Taip arba Ne.');
+    setError('autobusas', 'Pasirinkite, kaip vyksite.');
     ok = false;
   }
 
