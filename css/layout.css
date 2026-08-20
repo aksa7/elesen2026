@@ -1,0 +1,545 @@
+/* ==========================================================================
+   layout.css — sekcijų išdėstymas, fonas, dekoras, galerija, mobile
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Bendra struktūra
+   -------------------------------------------------------------------------- */
+.canvas {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: var(--color-bg-deep);
+  background-image: url('../assets/bg_slices/curtain_tile.webp');
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+}
+.content { position: relative; z-index: 2; }
+.decor-layer { display: none; pointer-events: none; }
+
+/* --------------------------------------------------------------------------
+   Shared headline lockup + spotlight_glow.webp
+   Same markup/CSS on index, registracija, aciu — centred via translate(-50%,-50%)
+   -------------------------------------------------------------------------- */
+.headline-lockup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.headline-lockup__glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* Design: ~820×784 over lockup ~723 wide → ~113% of lockup */
+  width: 113%;
+  height: auto;
+  min-width: min(92vw, 42rem);
+  aspect-ratio: 1200 / 1160;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+}
+.headline-lockup .hero-title {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero section — plain curtain only (no bg_1_hero) */
+.hero-section {
+  position: relative;
+}
+.hero-section > * { position: relative; z-index: 1; }
+
+/* Švytėjimas prie žibintų */
+.light-fixture-wrap { position: absolute; }
+.light-fixture-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(230, 160, 90, 0.35), transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+.light-fixture-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Žiedai — priverstinai apvalūs */
+.decor--ring-1 img,
+.decor--ring-2 img,
+.decor--ring-3 img,
+.decor.decor--ring-1,
+.decor.decor--ring-2,
+.decor.decor--ring-3 {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   MOBILE / TABLET (< 1025px)
+   ========================================================================== */
+.section-inner {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+section, .hero { padding-block: var(--space-lg); }
+
+.hero-section .hero { padding-top: 8vw; }
+.hero-section .cta { padding-bottom: 8vw; }
+
+.hero__inner { text-align: center; }
+.hero-title {
+  display: flex; flex-direction: column; align-items: center; gap: 0.1em;
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  color: #ffffff;
+}
+.hero-title__greatest { margin-top: -0.15em; }
+/* Design: Greatest block ~452px, logo 117px → ~3.9:1. Logo width 502/242 ≈ 2.07em */
+.hero-title__logo {
+  width: 2.07em;
+  height: auto;
+  margin-block: 0.15em;
+}
+.hero-title__show {
+  display: block;
+  font-size: 0.545em;
+  margin-top: 0.12em;
+}
+.hero__date {
+  margin-top: var(--space-md);
+  font-size: var(--fs-small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.intro { text-align: center; }
+.intro__lead {
+  max-width: none; margin-inline: auto;
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+}
+.cta { text-align: center; }
+.cta__button {
+  display: inline-block; min-height: 44px; padding: 1.4em 2.4em;
+  background: var(--color-cta-bg); color: var(--color-cta-text);
+  font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: var(--fs-small); border-radius: var(--radius);
+  transition: transform var(--transition);
+}
+.cta__button:hover { transform: translateY(-2px); }
+.program { text-align: center; }
+.program__title { font-size: var(--fs-h2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-md); color: var(--color-gold); }
+.program__row { margin-bottom: var(--space-md); }
+.program__time { font-size: var(--fs-program-time); font-weight: 700; color: var(--color-heading); }
+.program__desc { font-size: var(--fs-small); color: var(--color-text-muted); margin-top: 0.25em; }
+.dresscode { text-align: center; }
+.dresscode__title { font-size: var(--fs-h2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-md); color: var(--color-gold); }
+.dresscode__body, .dresscode__lead { max-width: none; margin-inline: auto; margin-bottom: var(--space-sm); }
+.dresscode__lead { font-weight: 600; margin-top: var(--space-md); color: var(--color-gold); }
+.dresscode__list { display: inline-block; text-align: left; margin-block: var(--space-sm); }
+.dresscode__list li { position: relative; padding-left: 1.4em; margin-bottom: 0.5em; }
+.dresscode__list li::before { content: "•"; position: absolute; left: 0; color: var(--color-gold); }
+.dresscode__accent { max-width: none; margin: var(--space-md) auto 0; font-weight: 600; color: var(--color-gold); }
+
+/* Mobile gallery — desktop eilučių ritmas: 1, 2, 2, 3, 2, 1, 3 */
+.gallery__photo {
+  border-radius: 8px;
+  object-fit: cover;
+  height: auto;
+  display: block;
+  box-shadow: 0 0 0 1.5px rgba(212, 175, 100, 0.55);
+}
+.gallery__photo--featured {
+  width: 92%;
+  max-width: none;
+  margin: 0 auto 0.55rem;
+}
+.gallery__grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+}
+.gallery__row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0.5rem;
+  width: 100%;
+}
+.gallery__grid .gallery__photo {
+  flex: 0 1 auto;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+/* 2 nuotraukos eilutėje */
+.gallery__row--2 .gallery__photo,
+.gallery__row--3 .gallery__photo,
+.gallery__row--5 .gallery__photo {
+  width: calc(50% - 0.25rem);
+}
+/* 3 nuotraukos eilutėje */
+.gallery__row--4 .gallery__photo,
+.gallery__row--7 .gallery__photo {
+  width: calc(33.333% - 0.35rem);
+}
+/* Viena centruota (photo_11) */
+.gallery__row--6 .gallery__photo {
+  width: 78%;
+  max-width: 300px;
+}
+
+/* Mobile dekoras */
+@media (max-width: 1024px) {
+  .decor-layer--back {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .decor-layer--front {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+  }
+  .decor { position: absolute; display: block; }
+
+  /* Foniniame sluoksnyje mobile: film reel + bowtie */
+  .decor-layer--back .decor--ring-1,
+  .decor-layer--back .decor--ring-2,
+  .decor-layer--back .decor--ring-3,
+  .decor-layer--back .decor--light-fixture-1,
+  .decor-layer--back .decor--light-fixture-2,
+  .decor-layer--back .decor--film-reel-3 { display: none; }
+
+  .decor-layer--back .decor--film-reel-1 {
+    left: -18rem;
+    top: 82rem;
+    width: 16rem;
+    height: auto;
+  }
+  .decor-layer--back .decor--bowtie {
+    left: auto;
+    right: -0.5rem;
+    top: 115rem;
+    width: 9rem;
+    height: auto;
+  }
+
+  /* Priekiniame sluoksnyje mobile: tik mic */
+  .decor-layer--front .decor--mic {
+    left: auto;
+    right: 1rem;
+    top: 0;
+    width: 7.5rem;
+    height: auto;
+  }
+
+  .gallery-decor {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .gallery-decor .decor {
+    position: absolute;
+    display: block;
+  }
+  .gallery-decor .decor--walk-of-fame-star {
+    left: auto;
+    right: 4%;
+    top: 0.5rem;
+    width: 22vw;
+    max-width: 9rem;
+    height: auto;
+  }
+  /* Po bendros .decor taisyklės — kitaip display:block ją perrašo */
+  .gallery-decor .decor--camera,
+  .gallery-decor .decor--film-reel-2,
+  .gallery-decor .decor--clapperboard { display: none; }
+
+  .gallery .section-inner {
+    position: relative;
+  }
+}
+
+/* ==========================================================================
+   DESKTOP — fluid rem layout (1rem = 10px at 1920px)
+   ========================================================================== */
+@media (min-width: 1025px) {
+
+  .decor-layer--back {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .decor-layer--front {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+  }
+  .decor { position: absolute; display: block; }
+  .decor img { width: 100%; height: auto; }
+
+  /* manifest.json coordinates / 10 = rem, koreguota pagal reference */
+  .decor--mic             { left: 135.7rem; top: -3.4rem;  width: 13.3rem; }
+  .decor--film-reel-1     { left: -25rem;  top: 190rem;   width:   80rem; }
+  .decor--bowtie          { left: 133.4rem; top: 274.9rem; width: 35.6rem; }
+  .decor--ring-1          { left: 12.3rem;  top: 355.7rem; width: 32.2rem; height: 32.2rem; object-fit: contain; }
+  .decor--ring-2          { left: -20.7rem; top: 445.6rem; width: 50.9rem; height: 50.9rem; object-fit: contain; }
+  .decor--light-fixture-1 { left: 164.4rem; top: 406.5rem; width: 51.1rem; }
+  .decor--ring-3          { left: 163.2rem; top: 680.8rem; width: 53rem; height: 53rem; object-fit: contain; }
+  .decor--film-reel-3     { left: -20rem;   top: 759.9rem; width: 50.3rem; }
+  .decor--light-fixture-2 { left: 160.8rem; top: 845.2rem; width: 50.6rem; }
+
+  /* Galerijos dekoras — koordinatės nuo photo_01 (y 4044), z-index virš nuotraukų */
+  .gallery .section-inner { position: relative; }
+  .gallery-decor {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .gallery-decor .decor {
+    position: absolute;
+    display: block;
+    height: auto;
+  }
+
+  /* ---- Turinio stulpelis ---- */
+  .content p { max-width: none; }
+
+  .content .section-inner {
+    max-width: none;
+    padding-inline: 0;
+    margin-inline: auto;
+  }
+  .content section, .content .hero { padding-block: 0; }
+  .hero-section .hero,
+  .hero-section .intro,
+  .hero-section .cta { padding-block: 0; }
+
+  /* ---------- HERO ---------- */
+  .content .hero { padding: 15.1rem 0 0; text-align: center; }
+  /* The+Greatest ≈ 45.2rem tall at 24.2rem font (design 452px) */
+  .hero-title {
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+    font-family: var(--font-display);
+    color: #ffffff;
+    line-height: 1.02;
+    font-size: 24.2rem;
+  }
+  .hero-title__the,
+  .hero-title__greatest { display: block; }
+  .hero-title__logo {
+    width: 2.07em; /* 50.2rem @ 24.2rem → 502×117 design */
+    height: auto;
+    margin: 3.6rem 0 0;
+  }
+  .hero-title__show {
+    display: block;
+    font-size: 0.545em; /* 13.2rem @ 24.2rem */
+    margin-top: 2.4rem;
+  }
+  .headline-lockup__glow {
+    width: 113%;
+    min-width: 82rem; /* ~2×rx=820 */
+  }
+
+  .hero__date {
+    margin-top: 9.6rem;
+    font-size: 2.2rem;
+    line-height: 1.55;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- INTRO ---------- */
+  .intro { text-align: center; }
+  .intro__lead {
+    width: 110.2rem; max-width: 110.2rem;
+    margin: 25.8rem auto 0;
+    font-size: 3.4rem;
+    line-height: 1.62;
+    color: var(--color-text);
+  }
+
+  /* ---------- CTA ---------- */
+  .cta { text-align: center; }
+  .cta .section-inner { margin-top: 21.6rem; margin-bottom: 17.1rem; }
+  .cta__button {
+    font-size: 2.4rem;
+    padding: 1.8rem 4.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- RENGINIO PROGRAMA ---------- */
+  .program { text-align: center; }
+  .program .section-inner {
+    width: 81.6rem; max-width: 81.6rem;
+    margin-top: 0;
+  }
+  .program__title {
+    font-size: 4.4rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 4rem;
+    color: var(--color-gold);
+  }
+  .program__row { margin-bottom: 3.4rem; }
+  .program__time { font-size: 3.2rem; font-weight: 700; }
+  .program__desc { font-size: 2.4rem; color: var(--color-text-muted); margin-top: 0.8rem; }
+
+  /* ---------- APRANGOS KODAS ---------- */
+  .dresscode { text-align: center; }
+  .dresscode .section-inner { width: 108.4rem; max-width: 108.4rem; }
+
+  .dresscode__title {
+    width: 57.2rem; margin: 25.3rem auto 0;
+    font-size: 4.4rem;
+    letter-spacing: 0.05em;
+    color: var(--color-gold);
+  }
+  .dresscode__body {
+    width: 108.4rem; max-width: 108.4rem; margin: 6.5rem auto 0;
+    font-size: 3.2rem; line-height: 1.5;
+  }
+  .dresscode__lead {
+    width: 108.4rem; max-width: 108.4rem; margin: 2.4rem auto 0;
+    font-size: 3.2rem; font-weight: 700;
+    color: var(--color-gold);
+  }
+  .dresscode__list {
+    width: 87.7rem; max-width: 87.7rem;
+    margin: 9.5rem auto 0;
+    display: block; text-align: center;
+    font-size: 3rem; line-height: 1.35;
+  }
+  .dresscode__list li { padding-left: 0; margin-bottom: 1.8rem; }
+  .dresscode__list li::before {
+    position: static;
+    content: "•\00a0\00a0";
+    color: var(--color-gold);
+  }
+  .dresscode__accent {
+    width: 85.9rem; max-width: 85.9rem;
+    margin: 18.9rem auto 0;
+    font-size: 3rem; line-height: 1.5; font-weight: 700;
+    color: var(--color-gold);
+  }
+
+  /* ---------- NUOTRAUKŲ GALERIJA — absolute positioning ---------- */
+  .gallery .section-inner {
+    position: relative;
+    width: 192rem;
+    max-width: 192rem;
+    margin-top: 10.5rem;
+    margin-bottom: 6rem;
+    height: 480rem;
+  }
+  .gallery__photo--featured {
+    position: absolute;
+    left: 64.1rem;
+    top: 0;
+    width: 65.6rem;
+    height: 92.4rem;
+    margin: 0;
+    border-radius: 0.4rem;
+    object-fit: cover;
+    z-index: 1;
+    box-shadow: 0 0 0 0.15rem rgba(245, 236, 226, 0.85);
+  }
+  .gallery__grid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .gallery__row {
+    display: contents;
+  }
+  .gallery__grid .gallery__photo {
+    position: absolute;
+    border-radius: 0.4rem;
+    object-fit: cover;
+    aspect-ratio: auto;
+    z-index: 1;
+    box-shadow: 0 0 0 0.15rem rgba(245, 236, 226, 0.85);
+    width: auto;
+    max-width: none;
+    flex: none;
+  }
+
+  /* Row 2 */
+  .gallery__row--2 .gallery__photo:nth-child(1) { left: 53.1rem; top: 94.1rem; width: 43.1rem; height: 65.7rem; }
+  .gallery__row--2 .gallery__photo:nth-child(2) { left: 98.2rem; top: 94.1rem; width: 42.1rem; height: 65.7rem; }
+  /* Row 3 */
+  .gallery__row--3 .gallery__photo:nth-child(1) { left: 53.4rem; top: 162rem;  width: 42.9rem; height: 65.6rem; }
+  .gallery__row--3 .gallery__photo:nth-child(2) { left: 98.4rem; top: 162rem;  width: 41.8rem; height: 65.6rem; }
+  /* Row 4 */
+  .gallery__row--4 .gallery__photo:nth-child(1) { left: 43.6rem; top: 230.2rem; width: 34rem;  height: 53.2rem; }
+  .gallery__row--4 .gallery__photo:nth-child(2) { left: 80rem;   top: 230.2rem; width: 34rem;  height: 53.2rem; }
+  .gallery__row--4 .gallery__photo:nth-child(3) { left: 116.3rem; top: 230.2rem; width: 34.1rem; height: 53.2rem; }
+  /* Row 5 */
+  .gallery__row--5 .gallery__photo:nth-child(1) { left: 61rem;   top: 285.9rem; width: 35.1rem; height: 53.1rem; }
+  .gallery__row--5 .gallery__photo:nth-child(2) { left: 98.4rem; top: 285.9rem; width: 34.8rem; height: 53.1rem; }
+  /* Row 6 — centruota */
+  .gallery__row--6 .gallery__photo:nth-child(1) {
+    left: 61.2rem; top: 341.6rem; width: 72.5rem; height: 80.3rem;
+    max-width: none;
+  }
+  /* Row 7 */
+  .gallery__row--7 .gallery__photo:nth-child(1) { left: 43rem;   top: 424.3rem; width: 34rem;  height: 53.1rem; }
+  .gallery__row--7 .gallery__photo:nth-child(2) { left: 79.6rem; top: 424.3rem; width: 34rem;  height: 53.1rem; }
+  .gallery__row--7 .gallery__photo:nth-child(3) { left: 116.2rem; top: 424.3rem; width: 34rem; height: 53.1rem; }
+
+  /* Galerijos dekoras — aiškiai virš nuotraukų */
+  .gallery-decor .decor--camera { left: 2.5rem; top: 141.2rem; width: 59.1rem; }
+  .gallery-decor .decor--film-reel-2 { left: 148rem; top: 152rem; width: 88rem; }
+  .gallery-decor .decor--clapperboard { left: 35rem; top: 271rem; width: 31.5rem; }
+  .gallery-decor .decor--walk-of-fame-star { left: 116.5rem; top: 54.4rem; width: 29.6rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal — content visible by default; JS adds .reveal-ready to hide
+   -------------------------------------------------------------------------- */
+.reveal-ready {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.reveal-ready.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

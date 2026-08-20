@@ -1,0 +1,163 @@
+{
+  "elesen_logo": {
+    "layer_name": "Elesen logo",
+    "x": 709,
+    "y": 549,
+    "width": 502,
+    "height": 117,
+    "file": "cutouts/elesen_logo.webp"
+  },
+  "mic": {
+    "layer_name": "mic",
+    "x": 1357,
+    "y": -34,
+    "width": 133,
+    "height": 587,
+    "file": "cutouts/mic.webp"
+  },
+  "film_reel_1": {
+    "layer_name": "movie film",
+    "x": -272,
+    "y": 1860,
+    "width": 747,
+    "height": 626,
+    "file": "cutouts/film_reel_1.webp"
+  },
+  "film_reel_2": {
+    "layer_name": "movie film",
+    "x": 1529,
+    "y": 5652,
+    "width": 1018,
+    "height": 822,
+    "file": "cutouts/film_reel_2.webp"
+  },
+  "film_reel_3": {
+    "layer_name": "movie film",
+    "x": -280,
+    "y": 7599,
+    "width": 703,
+    "height": 669,
+    "file": "cutouts/film_reel_3.webp"
+  },
+  "bowtie": {
+    "layer_name": "varlyte",
+    "x": 1334,
+    "y": 2749,
+    "width": 356,
+    "height": 306,
+    "file": "cutouts/bowtie.webp"
+  },
+  "ring_1": {
+    "layer_name": "Ring",
+    "x": 123,
+    "y": 3557,
+    "width": 322,
+    "height": 322,
+    "file": "cutouts/ring_1.webp"
+  },
+  "ring_2": {
+    "layer_name": "Ring 2",
+    "x": -207,
+    "y": 4456,
+    "width": 509,
+    "height": 509,
+    "file": "cutouts/ring_2.webp"
+  },
+  "ring_3": {
+    "layer_name": "Ring 1",
+    "x": 1632,
+    "y": 6808,
+    "width": 530,
+    "height": 530,
+    "file": "cutouts/ring_3.webp"
+  },
+  "light_fixture_1": {
+    "layer_name": "sviestuvas",
+    "x": 1644,
+    "y": 4065,
+    "width": 511,
+    "height": 784,
+    "file": "cutouts/light_fixture_1.webp"
+  },
+  "light_fixture_2": {
+    "layer_name": "sviestuvas",
+    "x": 1608,
+    "y": 8452,
+    "width": 506,
+    "height": 812,
+    "file": "cutouts/light_fixture_2.webp"
+  },
+  "walk_of_fame_star": {
+    "layer_name": "Walk of fame star",
+    "x": 1165,
+    "y": 4588,
+    "width": 296,
+    "height": 310,
+    "file": "cutouts/walk_of_fame_star.webp"
+  },
+  "clapperboard": {
+    "layer_name": "Pliauske",
+    "x": 386,
+    "y": 6790,
+    "width": 315,
+    "height": 313,
+    "file": "cutouts/clapperboard.webp"
+  },
+  "camera": {
+    "layer_name": "Camera",
+    "x": 25,
+    "y": 5456,
+    "width": 591,
+    "height": 769,
+    "file": "cutouts/camera.webp"
+  },
+  "_background_sections": {
+    "bg_1_hero": {
+      "y_start": 0,
+      "y_end": 1900,
+      "file": "bg_slices/bg_1_hero.webp",
+      "note": "Kept on disk; live site uses curtain_tile + spotlight_glow.webp instead of this as a section background."
+    }
+  },
+  "_canvas": {
+    "width": 1920,
+    "height": 9048
+  },
+  "_fonts": {
+    "display_script": "Gautreaux-Light",
+    "body_family": "Nexa (Book / Regular / Bold / ExtraBold / Heavy)"
+  },
+  "_photos": "See photos_manifest.json - collage split into 14 individual images",
+  "_background_architecture": {
+    "note": "Live background is a tiling curtain only. Sectioned bg_2/bg_3/bg_4 and bg_full_single have been removed.",
+    "base_tile": {
+      "file": "bg_slices/curtain_tile.webp",
+      "usage": "body/.canvas background-image, background-repeat: repeat-y, background-size: 100% auto. Seamless vertical loop for the entire page height at any breakpoint."
+    },
+    "hero_spotlight": {
+      "file": "cutouts/spotlight_glow.webp",
+      "usage": "Centred on .headline-lockup with mix-blend-mode: screen. Replaces the baked-in glow that lived in bg_1_hero."
+    },
+    "bg_1_hero": {
+      "file": "bg_slices/bg_1_hero.webp",
+      "usage": "Archive / reference only. Not applied as a CSS background on the live site."
+    },
+    "warm_glows": {
+      "note": "The two lower warm light blooms approximate with CSS on .light-fixture-wrap, e.g. radial-gradient(circle, rgba(230,160,90,0.35), transparent 70%)."
+    }
+  },
+  "spotlight_glow": {
+    "file": "cutouts/spotlight_glow.webp",
+    "width": 1200,
+    "height": 1160,
+    "note": "Synthesised clean radial glow, NO curtain texture baked in. Apply with mix-blend-mode: screen over the curtain. Centre it on the hero lockup centre."
+  },
+  "hero_lockup": {
+    "file": "cutouts/hero_lockup.webp",
+    "x": 569,
+    "y": 151,
+    "width": 723,
+    "height": 686,
+    "note": "FALLBACK ONLY. Full 'The Greatest / elesen / show' lockup rasterised exactly as designed. Use only if live Gautreaux text fails — pair with a screen-reader-only heading for SEO."
+  }
+}

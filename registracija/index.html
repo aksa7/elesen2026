@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registracija — The Greatest ELESEN Show</title>
+  <meta name="description" content="Registracija į The Greatest ELESEN Show renginį — 2026.09.24, Kino teatras „Daina“, Kaunas.">
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/form.css">
+</head>
+<body>
+
+  <div class="canvas form-page form-page--reg">
+    <div class="form-page__inner">
+      <header class="form-page__header">
+        <a class="form-page__brand headline-lockup" href="../">
+          <img class="headline-lockup__glow" src="../assets/cutouts/spotlight_glow.webp"
+               alt="" width="1200" height="1160" aria-hidden="true" decoding="async">
+          <h1 class="hero-title form-page__logo">
+            <span class="hero-title__the">The</span>
+            <span class="hero-title__greatest">Greatest</span>
+            <img class="hero-title__logo" src="../assets/cutouts/elesen_logo.webp"
+                 alt="ELESEN" width="502" height="117">
+            <span class="hero-title__show">show</span>
+          </h1>
+        </a>
+
+        <p class="form-page__meta hero__date">
+          2026.09.24<br>
+          Kino teatras „Daina“, Kaunas
+        </p>
+      </header>
+
+      <h2 class="form-page__title">Registracija į renginį</h2>
+
+      <div class="form-alert" id="form-alert" hidden role="alert"></div>
+
+      <form class="reg-form" id="reg-form" novalidate>
+        <div class="reg-form__field">
+          <label for="vardas">Vardas, pavardė</label>
+          <input type="text" id="vardas" name="vardas" autocomplete="name" required
+                 aria-describedby="vardas-error">
+          <p class="reg-form__error" id="vardas-error" hidden></p>
+        </div>
+
+        <div class="reg-form__field">
+          <label for="telefonas">Telefono nr.</label>
+          <input type="tel" id="telefonas" name="telefonas" autocomplete="tel" required
+                 aria-describedby="telefonas-error">
+          <p class="reg-form__error" id="telefonas-error" hidden></p>
+        </div>
+
+        <div class="reg-form__field">
+          <label for="elpastas">El. paštas</label>
+          <input type="email" id="elpastas" name="elpastas" autocomplete="email" required
+                 aria-describedby="elpastas-error">
+          <p class="reg-form__error" id="elpastas-error" hidden></p>
+        </div>
+
+        <div class="reg-form__field">
+          <label for="miestas">Miestas</label>
+          <input type="text" id="miestas" name="miestas" autocomplete="address-level2" required
+                 aria-describedby="miestas-error">
+          <p class="reg-form__error" id="miestas-error" hidden></p>
+        </div>
+
+        <fieldset class="reg-form__field reg-form__field--radio">
+          <legend>Ar vyksite autobusu?</legend>
+          <div class="reg-form__radios" role="group" aria-describedby="autobusas-error">
+            <label class="reg-form__radio">
+              <input type="radio" name="autobusas" value="Taip" required>
+              <span>Taip</span>
+            </label>
+            <label class="reg-form__radio">
+              <input type="radio" name="autobusas" value="Ne" required>
+              <span>Ne</span>
+            </label>
+          </div>
+          <p class="reg-form__error" id="autobusas-error" hidden></p>
+        </fieldset>
+
+        <div class="reg-form__hp" aria-hidden="true">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" class="cta__button reg-form__submit" id="reg-submit">
+          Registruotis
+        </button>
+      </form>
+
+      <p class="form-page__back">
+        <a href="../">← Grįžti į pagrindinį</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="module" src="../js/form.js" defer></script>
+</body>
+</html>
